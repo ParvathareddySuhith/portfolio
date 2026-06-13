@@ -1112,15 +1112,15 @@ var _profileJpg = require("url:./assets/profile.jpg");
 var _profileJpgDefault = parcelHelpers.interopDefault(_profileJpg);
 var _resumePdf = require("url:./assets/resume.pdf");
 var _resumePdfDefault = parcelHelpers.interopDefault(_resumePdf);
-var _stampedeJpg = require("url:./assets/stampede.jpg");
-var _stampedeJpgDefault = parcelHelpers.interopDefault(_stampedeJpg);
-var _floatchatJpg = require("url:./assets/floatchat.jpg");
-var _floatchatJpgDefault = parcelHelpers.interopDefault(_floatchatJpg);
-var _queryBotJpg = require("url:./assets/query_bot.jpg");
-var _queryBotJpgDefault = parcelHelpers.interopDefault(_queryBotJpg);
+var _stampedeProjectPng = require("url:./assets/stampede-project.png");
+var _stampedeProjectPngDefault = parcelHelpers.interopDefault(_stampedeProjectPng);
+var _floatchatProjectPng = require("url:./assets/floatchat-project.png");
+var _floatchatProjectPngDefault = parcelHelpers.interopDefault(_floatchatProjectPng);
+var _studentQueryBotProjectPng = require("url:./assets/student-query-bot-project.png");
+var _studentQueryBotProjectPngDefault = parcelHelpers.interopDefault(_studentQueryBotProjectPng);
 const portfolioConfig = {
     name: "Suhith Reddy Parvathareddy",
-    title: "AI & Full-Stack Developer",
+    title: "AI Engineer • Full-Stack Developer • IEEE Published Researcher",
     email: "parvathareddysuhithreddy.cse2023@citchennai.net",
     github: "https://github.com/ParvathareddySuhith",
     linkedin: "https://linkedin.com/in/suhith-reddy",
@@ -1128,13 +1128,13 @@ const portfolioConfig = {
     resume: (0, _resumePdfDefault.default),
     profileImage: (0, _profileJpgDefault.default),
     projects: {
-        stampede: (0, _stampedeJpgDefault.default),
-        floatchat: (0, _floatchatJpgDefault.default),
-        queryBot: (0, _queryBotJpgDefault.default)
+        stampede: (0, _stampedeProjectPngDefault.default),
+        floatchat: (0, _floatchatProjectPngDefault.default),
+        queryBot: (0, _studentQueryBotProjectPngDefault.default)
     }
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","url:./assets/profile.jpg":"7Q4sD","url:./assets/resume.pdf":"dv9Ni","url:./assets/stampede.jpg":"6mduv","url:./assets/floatchat.jpg":"7MsNC","url:./assets/query_bot.jpg":"fPkg5"}],"7Q4sD":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","url:./assets/profile.jpg":"7Q4sD","url:./assets/resume.pdf":"dv9Ni","url:./assets/stampede-project.png":"37FyG","url:./assets/floatchat-project.png":"baYmY","url:./assets/student-query-bot-project.png":"jv6zA"}],"7Q4sD":[function(require,module,exports) {
 module.exports = require("b7637c9c58db2366").getBundleURL("bLxZJ") + "profile.bb7d410f.jpg" + "?" + Date.now();
 
 },{"b7637c9c58db2366":"lgJ39"}],"lgJ39":[function(require,module,exports) {
@@ -1174,15 +1174,15 @@ exports.getOrigin = getOrigin;
 },{}],"dv9Ni":[function(require,module,exports) {
 module.exports = require("ef891a10281d8ee4").getBundleURL("bLxZJ") + "resume.6841d0b3.pdf" + "?" + Date.now();
 
-},{"ef891a10281d8ee4":"lgJ39"}],"6mduv":[function(require,module,exports) {
-module.exports = require("182856b317605ac9").getBundleURL("bLxZJ") + "stampede.8c863125.jpg" + "?" + Date.now();
+},{"ef891a10281d8ee4":"lgJ39"}],"37FyG":[function(require,module,exports) {
+module.exports = require("a888d13679a16542").getBundleURL("bLxZJ") + "stampede-project.6106c488.png" + "?" + Date.now();
 
-},{"182856b317605ac9":"lgJ39"}],"7MsNC":[function(require,module,exports) {
-module.exports = require("9ce3e0cb96c39c0e").getBundleURL("bLxZJ") + "floatchat.23551f32.jpg" + "?" + Date.now();
+},{"a888d13679a16542":"lgJ39"}],"baYmY":[function(require,module,exports) {
+module.exports = require("376544b3ec2a32d").getBundleURL("bLxZJ") + "floatchat-project.d5ddc23f.png" + "?" + Date.now();
 
-},{"9ce3e0cb96c39c0e":"lgJ39"}],"fPkg5":[function(require,module,exports) {
-module.exports = require("b0ee42c14502df17").getBundleURL("bLxZJ") + "query_bot.25a7457e.jpg" + "?" + Date.now();
+},{"376544b3ec2a32d":"lgJ39"}],"jv6zA":[function(require,module,exports) {
+module.exports = require("9a96c5a2720563c6").getBundleURL("bLxZJ") + "student-query-bot-project.edd18d69.png" + "?" + Date.now();
 
-},{"b0ee42c14502df17":"lgJ39"}]},["ShInH","8lqZg"], "8lqZg", "parcelRequire2041")
+},{"9a96c5a2720563c6":"lgJ39"}]},["ShInH","8lqZg"], "8lqZg", "parcelRequire2041")
 
 //# sourceMappingURL=index.975ef6c8.js.map
