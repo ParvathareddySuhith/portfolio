@@ -546,21 +546,134 @@ var _scrollRevealConfig = require("./data/scrollRevealConfig");
 (0, _scrollRevealDefault.default)((0, _scrollRevealConfig.targetElements), (0, _scrollRevealConfig.defaultProps));
 (0, _tiltAnimationDefault.default)();
 
-},{"./scripts/scrollReveal":"54rka","./scripts/tiltAnimation":"72kAb","./data/scrollRevealConfig":"5aORV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./scripts/injectConfig":"aLysT"}],"54rka":[function(require,module,exports) {
+},{"./scripts/injectConfig":"aLysT","./scripts/scrollReveal":"54rka","./scripts/tiltAnimation":"72kAb","./data/scrollRevealConfig":"5aORV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aLysT":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-function initScrollReveal(targetElements, defaultProps) {
-    if (!targetElements.length) return;
-    ScrollReveal({
-        reset: false
+var _portfolioConfig = require("../portfolio.config");
+function injectConfig() {
+    // Update document metadata
+    document.title = `${(0, _portfolioConfig.portfolioConfig).name} | ${(0, _portfolioConfig.portfolioConfig).title}`;
+    const descriptionMeta = document.querySelector('meta[name="description"]');
+    if (descriptionMeta) descriptionMeta.setAttribute("content", `Portfolio of ${(0, _portfolioConfig.portfolioConfig).name} - ${(0, _portfolioConfig.portfolioConfig).title}`);
+    const keywordsMeta = document.querySelector('meta[name="keywords"]');
+    if (keywordsMeta) keywordsMeta.setAttribute("content", `${(0, _portfolioConfig.portfolioConfig).name}, portfolio, developer, AI, Full-Stack`);
+    // Walk DOM to replace text content
+    const walkText = (node)=>{
+        if (node.nodeType === Node.TEXT_NODE) {
+            let text = node.nodeValue;
+            if (text.includes("NAME_PLACEHOLDER")) text = text.replace(/NAME_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).name);
+            if (text.includes("TITLE_PLACEHOLDER")) text = text.replace(/TITLE_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).title);
+            if (text.includes("EMAIL_PLACEHOLDER")) text = text.replace(/EMAIL_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).email);
+            node.nodeValue = text;
+        } else for (let child of node.childNodes)walkText(child);
+    };
+    walkText(document.body);
+    // Update elements with data-src attributes
+    const srcElements = document.querySelectorAll("[data-src]");
+    srcElements.forEach((el)=>{
+        let val = el.getAttribute("data-src");
+        let updated = val;
+        if (updated.includes("PROFILE_IMAGE_PLACEHOLDER")) updated = updated.replace(/PROFILE_IMAGE_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).profileImage);
+        if (updated.includes("STAMPEDE_IMAGE_PLACEHOLDER")) updated = updated.replace(/STAMPEDE_IMAGE_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).projects.stampede);
+        if (updated.includes("FLOATCHAT_IMAGE_PLACEHOLDER")) updated = updated.replace(/FLOATCHAT_IMAGE_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).projects.floatchat);
+        if (updated.includes("QUERYBOT_IMAGE_PLACEHOLDER")) updated = updated.replace(/QUERYBOT_IMAGE_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).projects.queryBot);
+        el.setAttribute("src", updated);
     });
-    targetElements.forEach(({ element , animation  })=>{
-        ScrollReveal().reveal(element, Object.assign({}, defaultProps, animation));
+    // Update elements with data-href attributes
+    const hrefElements = document.querySelectorAll("[data-href]");
+    hrefElements.forEach((el)=>{
+        let val = el.getAttribute("data-href");
+        let updated = val;
+        if (updated.includes("EMAIL_PLACEHOLDER")) updated = updated.replace(/EMAIL_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).email);
+        if (updated.includes("GITHUB_PLACEHOLDER")) updated = updated.replace(/GITHUB_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).github);
+        if (updated.includes("LINKEDIN_PLACEHOLDER")) updated = updated.replace(/LINKEDIN_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).linkedin);
+        if (updated.includes("LEETCODE_PLACEHOLDER")) updated = updated.replace(/LEETCODE_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).leetcode);
+        if (updated.includes("RESUME_PLACEHOLDER")) updated = updated.replace(/RESUME_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).resume);
+        el.setAttribute("href", updated);
     });
 }
-exports.default = initScrollReveal;
+exports.default = injectConfig;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
+},{"../portfolio.config":"7NhFv","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7NhFv":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "portfolioConfig", ()=>portfolioConfig);
+var _profileJpg = require("url:./assets/profile.jpg");
+var _profileJpgDefault = parcelHelpers.interopDefault(_profileJpg);
+var _resumePdf = require("url:./assets/resume.pdf");
+var _resumePdfDefault = parcelHelpers.interopDefault(_resumePdf);
+var _stampedeProjectPng = require("url:./assets/stampede-project.png");
+var _stampedeProjectPngDefault = parcelHelpers.interopDefault(_stampedeProjectPng);
+var _floatchatProjectPng = require("url:./assets/floatchat-project.png");
+var _floatchatProjectPngDefault = parcelHelpers.interopDefault(_floatchatProjectPng);
+var _studentQueryBotProjectPng = require("url:./assets/student-query-bot-project.png");
+var _studentQueryBotProjectPngDefault = parcelHelpers.interopDefault(_studentQueryBotProjectPng);
+const portfolioConfig = {
+    name: "Suhith Reddy Parvathareddy",
+    title: "AI Engineer • Full-Stack Developer • IEEE Published Researcher",
+    email: "parvathareddysuhithreddy.cse2023@citchennai.net",
+    github: "https://github.com/ParvathareddySuhith",
+    linkedin: "https://linkedin.com/in/suhith-reddy",
+    leetcode: "https://leetcode.com/u/Suhith.Reddy",
+    resume: (0, _resumePdfDefault.default),
+    profileImage: (0, _profileJpgDefault.default),
+    projects: {
+        stampede: (0, _stampedeProjectPngDefault.default),
+        floatchat: (0, _floatchatProjectPngDefault.default),
+        queryBot: (0, _studentQueryBotProjectPngDefault.default)
+    }
+};
+
+},{"url:./assets/profile.jpg":"7Q4sD","url:./assets/resume.pdf":"dv9Ni","url:./assets/stampede-project.png":"37FyG","url:./assets/floatchat-project.png":"baYmY","url:./assets/student-query-bot-project.png":"jv6zA","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7Q4sD":[function(require,module,exports) {
+module.exports = require("b7637c9c58db2366").getBundleURL("bLxZJ") + "profile.bb7d410f.jpg" + "?" + Date.now();
+
+},{"b7637c9c58db2366":"lgJ39"}],"lgJ39":[function(require,module,exports) {
+"use strict";
+var bundleURL = {};
+function getBundleURLCached(id) {
+    var value = bundleURL[id];
+    if (!value) {
+        value = getBundleURL();
+        bundleURL[id] = value;
+    }
+    return value;
+}
+function getBundleURL() {
+    try {
+        throw new Error();
+    } catch (err) {
+        var matches = ("" + err.stack).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^)\n]+/g);
+        if (matches) // The first two stack frames will be this function and getBundleURLCached.
+        // Use the 3rd one, which will be a runtime in the original bundle.
+        return getBaseURL(matches[2]);
+    }
+    return "/";
+}
+function getBaseURL(url) {
+    return ("" + url).replace(/^((?:https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/.+)\/[^/]+$/, "$1") + "/";
+} // TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
+function getOrigin(url) {
+    var matches = ("" + url).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^/]+/);
+    if (!matches) throw new Error("Origin not found");
+    return matches[0];
+}
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+exports.getOrigin = getOrigin;
+
+},{}],"dv9Ni":[function(require,module,exports) {
+module.exports = require("ef891a10281d8ee4").getBundleURL("bLxZJ") + "resume.6841d0b3.pdf" + "?" + Date.now();
+
+},{"ef891a10281d8ee4":"lgJ39"}],"37FyG":[function(require,module,exports) {
+module.exports = require("a888d13679a16542").getBundleURL("bLxZJ") + "stampede-project.6106c488.png" + "?" + Date.now();
+
+},{"a888d13679a16542":"lgJ39"}],"baYmY":[function(require,module,exports) {
+module.exports = require("376544b3ec2a32d").getBundleURL("bLxZJ") + "floatchat-project.d5ddc23f.png" + "?" + Date.now();
+
+},{"376544b3ec2a32d":"lgJ39"}],"jv6zA":[function(require,module,exports) {
+module.exports = require("9a96c5a2720563c6").getBundleURL("bLxZJ") + "student-query-bot-project.edd18d69.png" + "?" + Date.now();
+
+},{"9a96c5a2720563c6":"lgJ39"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -590,7 +703,21 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"72kAb":[function(require,module,exports) {
+},{}],"54rka":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+function initScrollReveal(targetElements, defaultProps) {
+    if (!targetElements.length) return;
+    ScrollReveal({
+        reset: false
+    });
+    targetElements.forEach(({ element , animation  })=>{
+        ScrollReveal().reveal(element, Object.assign({}, defaultProps, animation));
+    });
+}
+exports.default = initScrollReveal;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"72kAb":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _vanillaTilt = require("vanilla-tilt");
@@ -1056,133 +1183,6 @@ const targetElements = [
     }
 ];
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aLysT":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _portfolioConfig = require("../portfolio.config");
-function injectConfig() {
-    // Update document metadata
-    document.title = `${(0, _portfolioConfig.portfolioConfig).name} | ${(0, _portfolioConfig.portfolioConfig).title}`;
-    const descriptionMeta = document.querySelector('meta[name="description"]');
-    if (descriptionMeta) descriptionMeta.setAttribute("content", `Portfolio of ${(0, _portfolioConfig.portfolioConfig).name} - ${(0, _portfolioConfig.portfolioConfig).title}`);
-    const keywordsMeta = document.querySelector('meta[name="keywords"]');
-    if (keywordsMeta) keywordsMeta.setAttribute("content", `${(0, _portfolioConfig.portfolioConfig).name}, portfolio, developer, AI, Full-Stack`);
-    // Walk DOM to replace text content
-    const walkText = (node)=>{
-        if (node.nodeType === Node.TEXT_NODE) {
-            let text = node.nodeValue;
-            if (text.includes("NAME_PLACEHOLDER")) text = text.replace(/NAME_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).name);
-            if (text.includes("TITLE_PLACEHOLDER")) text = text.replace(/TITLE_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).title);
-            if (text.includes("EMAIL_PLACEHOLDER")) text = text.replace(/EMAIL_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).email);
-            node.nodeValue = text;
-        } else for (let child of node.childNodes)walkText(child);
-    };
-    walkText(document.body);
-    // Update elements with data-src attributes
-    const srcElements = document.querySelectorAll("[data-src]");
-    srcElements.forEach((el)=>{
-        let val = el.getAttribute("data-src");
-        let updated = val;
-        if (updated.includes("PROFILE_IMAGE_PLACEHOLDER")) updated = updated.replace(/PROFILE_IMAGE_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).profileImage);
-        if (updated.includes("STAMPEDE_IMAGE_PLACEHOLDER")) updated = updated.replace(/STAMPEDE_IMAGE_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).projects.stampede);
-        if (updated.includes("FLOATCHAT_IMAGE_PLACEHOLDER")) updated = updated.replace(/FLOATCHAT_IMAGE_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).projects.floatchat);
-        if (updated.includes("QUERYBOT_IMAGE_PLACEHOLDER")) updated = updated.replace(/QUERYBOT_IMAGE_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).projects.queryBot);
-        el.setAttribute("src", updated);
-    });
-    // Update elements with data-href attributes
-    const hrefElements = document.querySelectorAll("[data-href]");
-    hrefElements.forEach((el)=>{
-        let val = el.getAttribute("data-href");
-        let updated = val;
-        if (updated.includes("EMAIL_PLACEHOLDER")) updated = updated.replace(/EMAIL_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).email);
-        if (updated.includes("GITHUB_PLACEHOLDER")) updated = updated.replace(/GITHUB_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).github);
-        if (updated.includes("LINKEDIN_PLACEHOLDER")) updated = updated.replace(/LINKEDIN_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).linkedin);
-        if (updated.includes("LEETCODE_PLACEHOLDER")) updated = updated.replace(/LEETCODE_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).leetcode);
-        if (updated.includes("RESUME_PLACEHOLDER")) updated = updated.replace(/RESUME_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).resume);
-        el.setAttribute("href", updated);
-    });
-}
-exports.default = injectConfig;
-
-},{"../portfolio.config":"7NhFv","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7NhFv":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "portfolioConfig", ()=>portfolioConfig);
-var _profileJpg = require("url:./assets/profile.jpg");
-var _profileJpgDefault = parcelHelpers.interopDefault(_profileJpg);
-var _resumePdf = require("url:./assets/resume.pdf");
-var _resumePdfDefault = parcelHelpers.interopDefault(_resumePdf);
-var _stampedeProjectPng = require("url:./assets/stampede-project.png");
-var _stampedeProjectPngDefault = parcelHelpers.interopDefault(_stampedeProjectPng);
-var _floatchatProjectPng = require("url:./assets/floatchat-project.png");
-var _floatchatProjectPngDefault = parcelHelpers.interopDefault(_floatchatProjectPng);
-var _studentQueryBotProjectPng = require("url:./assets/student-query-bot-project.png");
-var _studentQueryBotProjectPngDefault = parcelHelpers.interopDefault(_studentQueryBotProjectPng);
-const portfolioConfig = {
-    name: "Suhith Reddy Parvathareddy",
-    title: "AI Engineer • Full-Stack Developer • IEEE Published Researcher",
-    email: "parvathareddysuhithreddy.cse2023@citchennai.net",
-    github: "https://github.com/ParvathareddySuhith",
-    linkedin: "https://linkedin.com/in/suhith-reddy",
-    leetcode: "https://leetcode.com/u/Suhith.Reddy",
-    resume: (0, _resumePdfDefault.default),
-    profileImage: (0, _profileJpgDefault.default),
-    projects: {
-        stampede: (0, _stampedeProjectPngDefault.default),
-        floatchat: (0, _floatchatProjectPngDefault.default),
-        queryBot: (0, _studentQueryBotProjectPngDefault.default)
-    }
-};
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","url:./assets/profile.jpg":"7Q4sD","url:./assets/resume.pdf":"dv9Ni","url:./assets/stampede-project.png":"37FyG","url:./assets/floatchat-project.png":"baYmY","url:./assets/student-query-bot-project.png":"jv6zA"}],"7Q4sD":[function(require,module,exports) {
-module.exports = require("b7637c9c58db2366").getBundleURL("bLxZJ") + "profile.bb7d410f.jpg" + "?" + Date.now();
-
-},{"b7637c9c58db2366":"lgJ39"}],"lgJ39":[function(require,module,exports) {
-"use strict";
-var bundleURL = {};
-function getBundleURLCached(id) {
-    var value = bundleURL[id];
-    if (!value) {
-        value = getBundleURL();
-        bundleURL[id] = value;
-    }
-    return value;
-}
-function getBundleURL() {
-    try {
-        throw new Error();
-    } catch (err) {
-        var matches = ("" + err.stack).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^)\n]+/g);
-        if (matches) // The first two stack frames will be this function and getBundleURLCached.
-        // Use the 3rd one, which will be a runtime in the original bundle.
-        return getBaseURL(matches[2]);
-    }
-    return "/";
-}
-function getBaseURL(url) {
-    return ("" + url).replace(/^((?:https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/.+)\/[^/]+$/, "$1") + "/";
-} // TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
-function getOrigin(url) {
-    var matches = ("" + url).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^/]+/);
-    if (!matches) throw new Error("Origin not found");
-    return matches[0];
-}
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-exports.getOrigin = getOrigin;
-
-},{}],"dv9Ni":[function(require,module,exports) {
-module.exports = require("ef891a10281d8ee4").getBundleURL("bLxZJ") + "resume.6841d0b3.pdf" + "?" + Date.now();
-
-},{"ef891a10281d8ee4":"lgJ39"}],"37FyG":[function(require,module,exports) {
-module.exports = require("a888d13679a16542").getBundleURL("bLxZJ") + "stampede-project.6106c488.png" + "?" + Date.now();
-
-},{"a888d13679a16542":"lgJ39"}],"baYmY":[function(require,module,exports) {
-module.exports = require("376544b3ec2a32d").getBundleURL("bLxZJ") + "floatchat-project.d5ddc23f.png" + "?" + Date.now();
-
-},{"376544b3ec2a32d":"lgJ39"}],"jv6zA":[function(require,module,exports) {
-module.exports = require("9a96c5a2720563c6").getBundleURL("bLxZJ") + "student-query-bot-project.edd18d69.png" + "?" + Date.now();
-
-},{"9a96c5a2720563c6":"lgJ39"}]},["ShInH","8lqZg"], "8lqZg", "parcelRequire2041")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["ShInH","8lqZg"], "8lqZg", "parcelRequire2041")
 
 //# sourceMappingURL=index.975ef6c8.js.map
