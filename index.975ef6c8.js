@@ -554,29 +554,18 @@ function injectConfig() {
     // Update document metadata
     document.title = `${(0, _portfolioConfig.portfolioConfig).name} | ${(0, _portfolioConfig.portfolioConfig).title}`;
     const descriptionMeta = document.querySelector('meta[name="description"]');
-    if (descriptionMeta) descriptionMeta.setAttribute("content", `Portfolio of ${(0, _portfolioConfig.portfolioConfig).name} - ${(0, _portfolioConfig.portfolioConfig).title}`);
+    if (descriptionMeta) descriptionMeta.setAttribute("content", (0, _portfolioConfig.portfolioConfig).description);
     const keywordsMeta = document.querySelector('meta[name="keywords"]');
     if (keywordsMeta) keywordsMeta.setAttribute("content", `${(0, _portfolioConfig.portfolioConfig).name}, portfolio, developer, AI, Full-Stack`);
-    // Walk DOM to replace text content
-    const walkText = (node)=>{
-        if (node.nodeType === Node.TEXT_NODE) {
-            let text = node.nodeValue;
-            if (text.includes("NAME_PLACEHOLDER")) text = text.replace(/NAME_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).name);
-            if (text.includes("TITLE_PLACEHOLDER")) text = text.replace(/TITLE_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).title);
-            if (text.includes("EMAIL_PLACEHOLDER")) text = text.replace(/EMAIL_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).email);
-            node.nodeValue = text;
-        } else for (let child of node.childNodes)walkText(child);
-    };
-    walkText(document.body);
     // Update elements with data-src attributes
     const srcElements = document.querySelectorAll("[data-src]");
     srcElements.forEach((el)=>{
         let val = el.getAttribute("data-src");
         let updated = val;
-        if (updated.includes("PROFILE_IMAGE_PLACEHOLDER")) updated = updated.replace(/PROFILE_IMAGE_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).profileImage);
-        if (updated.includes("STAMPEDE_IMAGE_PLACEHOLDER")) updated = updated.replace(/STAMPEDE_IMAGE_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).projects.stampede);
-        if (updated.includes("FLOATCHAT_IMAGE_PLACEHOLDER")) updated = updated.replace(/FLOATCHAT_IMAGE_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).projects.floatchat);
-        if (updated.includes("QUERYBOT_IMAGE_PLACEHOLDER")) updated = updated.replace(/QUERYBOT_IMAGE_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).projects.queryBot);
+        if (updated.includes("PROFILE_IMAGE_URL")) updated = updated.replace(/PROFILE_IMAGE_URL/g, (0, _portfolioConfig.portfolioConfig).profileImage);
+        if (updated.includes("STAMPEDE_IMAGE_URL")) updated = updated.replace(/STAMPEDE_IMAGE_URL/g, (0, _portfolioConfig.portfolioConfig).projects.stampede);
+        if (updated.includes("FLOATCHAT_IMAGE_URL")) updated = updated.replace(/FLOATCHAT_IMAGE_URL/g, (0, _portfolioConfig.portfolioConfig).projects.floatchat);
+        if (updated.includes("QUERYBOT_IMAGE_URL")) updated = updated.replace(/QUERYBOT_IMAGE_URL/g, (0, _portfolioConfig.portfolioConfig).projects.queryBot);
         el.setAttribute("src", updated);
     });
     // Update elements with data-href attributes
@@ -584,11 +573,7 @@ function injectConfig() {
     hrefElements.forEach((el)=>{
         let val = el.getAttribute("data-href");
         let updated = val;
-        if (updated.includes("EMAIL_PLACEHOLDER")) updated = updated.replace(/EMAIL_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).email);
-        if (updated.includes("GITHUB_PLACEHOLDER")) updated = updated.replace(/GITHUB_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).github);
-        if (updated.includes("LINKEDIN_PLACEHOLDER")) updated = updated.replace(/LINKEDIN_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).linkedin);
-        if (updated.includes("LEETCODE_PLACEHOLDER")) updated = updated.replace(/LEETCODE_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).leetcode);
-        if (updated.includes("RESUME_PLACEHOLDER")) updated = updated.replace(/RESUME_PLACEHOLDER/g, (0, _portfolioConfig.portfolioConfig).resume);
+        if (updated.includes("RESUME_URL")) updated = updated.replace(/RESUME_URL/g, (0, _portfolioConfig.portfolioConfig).resume);
         el.setAttribute("href", updated);
     });
 }
@@ -610,7 +595,8 @@ var _studentQueryBotProjectPng = require("url:./assets/student-query-bot-project
 var _studentQueryBotProjectPngDefault = parcelHelpers.interopDefault(_studentQueryBotProjectPng);
 const portfolioConfig = {
     name: "Suhith Reddy Parvathareddy",
-    title: "AI Engineer • Full-Stack Developer • IEEE Published Researcher",
+    title: "AI Engineer & Full-Stack Developer",
+    description: "Final-year Computer Science student specializing in AI, Computer Vision, Full-Stack Development, and IEEE-published research.",
     email: "parvathareddysuhithreddy.cse2023@citchennai.net",
     github: "https://github.com/ParvathareddySuhith",
     linkedin: "https://linkedin.com/in/suhith-reddy",
