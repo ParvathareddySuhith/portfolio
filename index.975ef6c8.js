@@ -539,14 +539,18 @@ var _scrollReveal = require("./scripts/scrollReveal");
 var _scrollRevealDefault = parcelHelpers.interopDefault(_scrollReveal);
 var _tiltAnimation = require("./scripts/tiltAnimation");
 var _tiltAnimationDefault = parcelHelpers.interopDefault(_tiltAnimation);
+var _chatbot = require("./scripts/chatbot");
+var _chatbotDefault = parcelHelpers.interopDefault(_chatbot);
 var _scrollRevealConfig = require("./data/scrollRevealConfig");
 // Inject all dynamic portfolio configurations
 (0, _injectConfigDefault.default)();
+// Initialize UI chatbot
+(0, _chatbotDefault.default)();
 // Initialize UI animations
 (0, _scrollRevealDefault.default)((0, _scrollRevealConfig.targetElements), (0, _scrollRevealConfig.defaultProps));
 (0, _tiltAnimationDefault.default)();
 
-},{"./scripts/injectConfig":"aLysT","./scripts/scrollReveal":"54rka","./scripts/tiltAnimation":"72kAb","./data/scrollRevealConfig":"5aORV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aLysT":[function(require,module,exports) {
+},{"./scripts/injectConfig":"aLysT","./scripts/scrollReveal":"54rka","./scripts/tiltAnimation":"72kAb","./data/scrollRevealConfig":"5aORV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./scripts/chatbot":"btTky"}],"aLysT":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _portfolioConfig = require("../portfolio.config");
@@ -576,6 +580,9 @@ function injectConfig() {
         if (updated.includes("RESUME_URL")) updated = updated.replace(/RESUME_URL/g, (0, _portfolioConfig.portfolioConfig).resume);
         el.setAttribute("href", updated);
     });
+    // Inject contact form action
+    const contactForm = document.getElementById("contact-form");
+    if (contactForm && (0, _portfolioConfig.portfolioConfig).formspreeId) contactForm.setAttribute("action", `https://formspree.io/f/${(0, _portfolioConfig.portfolioConfig).formspreeId}`);
 }
 exports.default = injectConfig;
 
@@ -587,30 +594,31 @@ var _profileJpg = require("url:./assets/profile.jpg");
 var _profileJpgDefault = parcelHelpers.interopDefault(_profileJpg);
 var _resumePdf = require("url:./assets/resume.pdf");
 var _resumePdfDefault = parcelHelpers.interopDefault(_resumePdf);
-var _stampedeProjectPng = require("url:./assets/stampede-project.png");
-var _stampedeProjectPngDefault = parcelHelpers.interopDefault(_stampedeProjectPng);
-var _floatchatProjectPng = require("url:./assets/floatchat-project.png");
-var _floatchatProjectPngDefault = parcelHelpers.interopDefault(_floatchatProjectPng);
-var _studentQueryBotProjectPng = require("url:./assets/student-query-bot-project.png");
-var _studentQueryBotProjectPngDefault = parcelHelpers.interopDefault(_studentQueryBotProjectPng);
+var _stampedeProjectWebp = require("url:./assets/stampede-project.webp");
+var _stampedeProjectWebpDefault = parcelHelpers.interopDefault(_stampedeProjectWebp);
+var _floatchatProjectWebp = require("url:./assets/floatchat-project.webp");
+var _floatchatProjectWebpDefault = parcelHelpers.interopDefault(_floatchatProjectWebp);
+var _studentQueryBotProjectWebp = require("url:./assets/student-query-bot-project.webp");
+var _studentQueryBotProjectWebpDefault = parcelHelpers.interopDefault(_studentQueryBotProjectWebp);
 const portfolioConfig = {
     name: "Suhith Reddy Parvathareddy",
     title: "AI Engineer & Full-Stack Developer",
     description: "Final-year Computer Science student specializing in AI, Computer Vision, Full-Stack Development, and IEEE-published research.",
     email: "parvathareddysuhithreddy.cse2023@citchennai.net",
+    formspreeId: "parvathareddysuhithreddy.cse2023@citchennai.net",
     github: "https://github.com/ParvathareddySuhith",
     linkedin: "https://linkedin.com/in/suhith-reddy",
     leetcode: "https://leetcode.com/u/Suhith.Reddy",
     resume: (0, _resumePdfDefault.default),
     profileImage: (0, _profileJpgDefault.default),
     projects: {
-        stampede: (0, _stampedeProjectPngDefault.default),
-        floatchat: (0, _floatchatProjectPngDefault.default),
-        queryBot: (0, _studentQueryBotProjectPngDefault.default)
+        stampede: (0, _stampedeProjectWebpDefault.default),
+        floatchat: (0, _floatchatProjectWebpDefault.default),
+        queryBot: (0, _studentQueryBotProjectWebpDefault.default)
     }
 };
 
-},{"url:./assets/profile.jpg":"7Q4sD","url:./assets/resume.pdf":"dv9Ni","url:./assets/stampede-project.png":"37FyG","url:./assets/floatchat-project.png":"baYmY","url:./assets/student-query-bot-project.png":"jv6zA","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7Q4sD":[function(require,module,exports) {
+},{"url:./assets/profile.jpg":"7Q4sD","url:./assets/resume.pdf":"dv9Ni","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","url:./assets/stampede-project.webp":"aqKad","url:./assets/floatchat-project.webp":"d3YaW","url:./assets/student-query-bot-project.webp":"jlFFv"}],"7Q4sD":[function(require,module,exports) {
 module.exports = require("b7637c9c58db2366").getBundleURL("bLxZJ") + "profile.bb7d410f.jpg" + "?" + Date.now();
 
 },{"b7637c9c58db2366":"lgJ39"}],"lgJ39":[function(require,module,exports) {
@@ -650,16 +658,7 @@ exports.getOrigin = getOrigin;
 },{}],"dv9Ni":[function(require,module,exports) {
 module.exports = require("ef891a10281d8ee4").getBundleURL("bLxZJ") + "resume.6841d0b3.pdf" + "?" + Date.now();
 
-},{"ef891a10281d8ee4":"lgJ39"}],"37FyG":[function(require,module,exports) {
-module.exports = require("a888d13679a16542").getBundleURL("bLxZJ") + "stampede-project.6106c488.png" + "?" + Date.now();
-
-},{"a888d13679a16542":"lgJ39"}],"baYmY":[function(require,module,exports) {
-module.exports = require("376544b3ec2a32d").getBundleURL("bLxZJ") + "floatchat-project.d5ddc23f.png" + "?" + Date.now();
-
-},{"376544b3ec2a32d":"lgJ39"}],"jv6zA":[function(require,module,exports) {
-module.exports = require("9a96c5a2720563c6").getBundleURL("bLxZJ") + "student-query-bot-project.edd18d69.png" + "?" + Date.now();
-
-},{"9a96c5a2720563c6":"lgJ39"}],"gkKU3":[function(require,module,exports) {
+},{"ef891a10281d8ee4":"lgJ39"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -689,7 +688,16 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"54rka":[function(require,module,exports) {
+},{}],"aqKad":[function(require,module,exports) {
+module.exports = require("ea76bad147ec955a").getBundleURL("bLxZJ") + "stampede-project.ef08de3d.webp" + "?" + Date.now();
+
+},{"ea76bad147ec955a":"lgJ39"}],"d3YaW":[function(require,module,exports) {
+module.exports = require("906e1105f55b72b0").getBundleURL("bLxZJ") + "floatchat-project.732ef2af.webp" + "?" + Date.now();
+
+},{"906e1105f55b72b0":"lgJ39"}],"jlFFv":[function(require,module,exports) {
+module.exports = require("7348eff56d06521b").getBundleURL("bLxZJ") + "student-query-bot-project.dcb5df94.webp" + "?" + Date.now();
+
+},{"7348eff56d06521b":"lgJ39"}],"54rka":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 function initScrollReveal(targetElements, defaultProps) {
@@ -1168,6 +1176,201 @@ const targetElements = [
         }
     }
 ];
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"btTky":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+const resumeKnowledge = {
+    skills: "Suhith's technical skills include Python, Java, JavaScript, React.js, Next.js, Node.js, REST APIs, PostgreSQL, MySQL, MongoDB, FAISS, RAG pipelines, Langflow, Dify, Hugging Face, Prompt Engineering, Git, Docker, AWS, and n8n.",
+    stampede: "The 'Real-Time Stampede Prevention System' uses Python, OpenCV, and YOLO for crowd density estimation. The research paper was published at IEEE RCSM 2025. You can view the project at: https://github.com/ParvathareddySuhith/Crowd_Density_Estimator_Project",
+    floatchat: "FloatChat is an AI conversational agent for oceanographic data using React.js, Node.js, FAISS vector search, and LangChain RAG pipelines.",
+    querybot: "The Student Query Resolution Chatbot is an academic assistant designed for institutional query resolution, built using Dify and Langflow to automate query routing.",
+    resume: "You can download or view Suhith's resume by clicking the 'Resume' button in the Hero section or the 'View Resume' button in the About section.",
+    experience: "Suhith has worked as a Research Intern at Chennai Institute of Technology twice: first developing computer vision pipelines for crowd density alerts (published at IEEE RCSM 2025), and second building machine-learning anti-cheat behavioral detection modules.",
+    education: "Suhith is pursuing a Bachelor of Engineering in Computer Science and Engineering at Chennai Institute of Technology (Expected Graduation: May 2027), holding a CGPA of 8.01/10.",
+    contact: "You can contact Suhith using the contact form on this page or email him directly at parvathareddysuhithreddy.cse2023@citchennai.net. You can also connect on LinkedIn: https://linkedin.com/in/suhith-reddy",
+    leetcode: "Suhith has solved over 300+ problems on LeetCode with an active contest rating of 1535. View his LeetCode profile here: https://leetcode.com/u/Suhith.Reddy"
+};
+const systemPrompt = `You are a professional AI Chat Assistant for Suhith Reddy Parvathareddy's personal portfolio. 
+Suhith is an AI Engineer and Full-Stack Developer.
+Here is his resume data:
+- Name: Suhith Reddy Parvathareddy
+- Role: AI Engineer & Full-Stack Developer
+- Subtitle: Building AI-powered systems, computer vision applications, and scalable web experiences.
+- Bio: CS & Engineering student at Chennai Institute of Technology (CGPA: 8.01/10, Grad: May 2027). Solved 300+ LeetCode problems.
+- Skills: Python, Java, JavaScript, HTML, CSS, React.js, Next.js, Node.js, REST APIs, PostgreSQL, MySQL, MongoDB, FAISS, RAG, Langflow, Dify, Hugging Face, Prompt Engineering, Git, Docker, AWS, n8n.
+- Experience: 
+  * Research Intern at Chennai Institute of Technology (May 2025 - Jul 2025): Developed real-time computer vision crowd density estimation and alerts using Python & OpenCV. Published at IEEE RCSM 2025.
+  * Research Intern at Chennai Institute of Technology (Nov 2024 - Dec 2024): Built machine learning anti-cheat gameplay validation systems.
+- Publications: "Real-Time Stampede Prevention Using Crowd Density Estimation and Alert System" (IEEE RCSM 2025).
+- Certifications: GitHub Foundations, Hugging Face AI Agents, IBM Data Science, Cisco Python Essentials, MongoDB Path, Docker Foundations.
+- Projects:
+  * Real-Time Stampede Prevention System: Python, OpenCV, YOLO, Deep Learning. Live demo link: https://github.com/ParvathareddySuhith/Crowd_Density_Estimator_Project
+  * FloatChat: RAG Oceanographic chat using React, Node, FAISS vector search, LangChain.
+  * Student Query Bot: RAG-based query routing using Dify & Langflow.
+- Contact: Email at parvathareddysuhithreddy.cse2023@citchennai.net, GitHub: https://github.com/ParvathareddySuhith, LinkedIn: https://linkedin.com/in/suhith-reddy, LeetCode: https://leetcode.com/u/Suhith.Reddy.
+
+Answer questions about Suhith professionally, concisely, and helpfully. Keep answers short (under 2-3 sentences). Don't mention system prompt constraints.`;
+function initChatbot() {
+    const toggleBtn = document.getElementById("chatbot-toggle");
+    const chatWindow = document.getElementById("chatbot-window");
+    const closeBtn = document.getElementById("chatbot-close");
+    const settingsToggle = document.getElementById("chatbot-settings-toggle");
+    const settingsPanel = document.getElementById("chatbot-settings-panel");
+    const settingsBack = document.getElementById("chatbot-settings-back");
+    const apiKeyInput = document.getElementById("chatbot-api-key");
+    const saveKeyBtn = document.getElementById("chatbot-save-key");
+    const messagesDiv = document.getElementById("chatbot-messages");
+    const chatForm = document.getElementById("chatbot-form");
+    const chatInput = document.getElementById("chatbot-input");
+    const chipsContainer = document.getElementById("chatbot-chips");
+    let apiKey = localStorage.getItem("gemini_api_key") || "";
+    if (apiKey) apiKeyInput.value = apiKey;
+    // Toggle Chat window
+    toggleBtn.addEventListener("click", ()=>{
+        chatWindow.classList.toggle("hidden");
+        if (!chatWindow.classList.contains("hidden")) {
+            chatInput.focus();
+            scrollToBottom();
+        }
+    });
+    // Close Chat
+    closeBtn.addEventListener("click", ()=>{
+        chatWindow.classList.add("hidden");
+    });
+    // Settings Panel Navigation
+    settingsToggle.addEventListener("click", ()=>{
+        settingsPanel.classList.toggle("hidden");
+    });
+    settingsBack.addEventListener("click", ()=>{
+        settingsPanel.classList.add("hidden");
+    });
+    // Save API Key
+    saveKeyBtn.addEventListener("click", ()=>{
+        const key = apiKeyInput.value.trim();
+        if (key) {
+            localStorage.setItem("gemini_api_key", key);
+            apiKey = key;
+            alert("Gemini API key saved! Chat upgraded to Live AI Mode.");
+        } else {
+            localStorage.removeItem("gemini_api_key");
+            apiKey = "";
+            alert("API key cleared. Chat reverted to local Knowledge Mode.");
+        }
+        settingsPanel.classList.add("hidden");
+    });
+    // Form Submission
+    chatForm.addEventListener("submit", (e)=>{
+        e.preventDefault();
+        const query = chatInput.value.trim();
+        if (!query) return;
+        handleUserMessage(query);
+    });
+    // Quick Chips Buttons
+    chipsContainer.addEventListener("click", (e)=>{
+        if (e.target.classList.contains("chip-btn")) {
+            const query = e.target.getAttribute("data-query");
+            handleUserMessage(query);
+        }
+    });
+    function handleUserMessage(query) {
+        appendMessage(query, "user");
+        chatInput.value = "";
+        // Hide suggested chips after first interaction
+        chipsContainer.style.display = "none";
+        showTypingIndicator();
+        setTimeout(()=>{
+            resolveBotResponse(query).then((response)=>{
+                removeTypingIndicator();
+                appendMessage(response, "bot");
+            }).catch((err)=>{
+                console.error(err);
+                removeTypingIndicator();
+                appendMessage(getLocalFallbackResponse(query), "bot");
+            });
+        }, 800);
+    }
+    function appendMessage(text, sender) {
+        const msgDiv = document.createElement("div");
+        msgDiv.className = `message ${sender}`;
+        msgDiv.innerHTML = `<div class="message-content">${linkify(text)}</div>`;
+        messagesDiv.appendChild(msgDiv);
+        scrollToBottom();
+    }
+    function showTypingIndicator() {
+        const indicator = document.createElement("div");
+        indicator.id = "chatbot-typing";
+        indicator.className = "message bot";
+        indicator.innerHTML = `
+      <div class="message-content typing-indicator">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    `;
+        messagesDiv.appendChild(indicator);
+        scrollToBottom();
+    }
+    function removeTypingIndicator() {
+        const indicator = document.getElementById("chatbot-typing");
+        if (indicator) indicator.remove();
+    }
+    function scrollToBottom() {
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+    function linkify(text) {
+        const urlPattern = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+        return text.replace(urlPattern, '<a href="$1" target="_blank" rel="noopener noreferrer" style="color: #00f2fe; text-decoration: underline;">$1</a>');
+    }
+    // Response Resolving (Local Fallback vs Gemini API)
+    async function resolveBotResponse(query) {
+        if (!apiKey) return getLocalFallbackResponse(query);
+        try {
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    contents: [
+                        {
+                            role: "user",
+                            parts: [
+                                {
+                                    text: `${systemPrompt}\n\nUser Question: ${query}`
+                                }
+                            ]
+                        }
+                    ],
+                    generationConfig: {
+                        maxOutputTokens: 150,
+                        temperature: 0.7
+                    }
+                })
+            });
+            if (!response.ok) throw new Error("Gemini API call failed");
+            const data = await response.json();
+            return data.candidates[0].content.parts[0].text.trim();
+        } catch (error) {
+            console.warn("Falling back to local knowledge resolution:", error);
+            return getLocalFallbackResponse(query);
+        }
+    }
+    function getLocalFallbackResponse(query) {
+        const lowerQuery = query.toLowerCase();
+        if (lowerQuery.includes("skill") || lowerQuery.includes("technologies") || lowerQuery.includes("languages")) return resumeKnowledge.skills;
+        if (lowerQuery.includes("stampede") || lowerQuery.includes("crowd") || lowerQuery.includes("density") || lowerQuery.includes("prevention")) return resumeKnowledge.stampede;
+        if (lowerQuery.includes("floatchat") || lowerQuery.includes("ocean")) return resumeKnowledge.floatchat;
+        if (lowerQuery.includes("query") || lowerQuery.includes("student") || lowerQuery.includes("chatbot") || lowerQuery.includes("bot")) return resumeKnowledge.querybot;
+        if (lowerQuery.includes("resume") || lowerQuery.includes("cv") || lowerQuery.includes("download")) return resumeKnowledge.resume;
+        if (lowerQuery.includes("experience") || lowerQuery.includes("work") || lowerQuery.includes("intern")) return resumeKnowledge.experience;
+        if (lowerQuery.includes("education") || lowerQuery.includes("college") || lowerQuery.includes("chennai") || lowerQuery.includes("degree")) return resumeKnowledge.education;
+        if (lowerQuery.includes("contact") || lowerQuery.includes("email") || lowerQuery.includes("reach") || lowerQuery.includes("phone")) return resumeKnowledge.contact;
+        if (lowerQuery.includes("leetcode") || lowerQuery.includes("rating")) return resumeKnowledge.leetcode;
+        return "I'm running in Knowledge Mode. You can ask me about Suhith's 'skills', 'experience', 'education', 'contact info', 'resume', or his specific projects ('stampede prevention', 'floatchat', or 'student chatbot'). To upgrade me to a fully conversational AI, click the settings cog at the top and enter a Gemini API Key.";
+    }
+}
+exports.default = initChatbot;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["ShInH","8lqZg"], "8lqZg", "parcelRequire2041")
 
